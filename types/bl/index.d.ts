@@ -17,6 +17,7 @@ declare class BufferListStream {
     constructor(initialData?: Buffer | Buffer[] | BufferList | BufferList[] | string);
     static isBufferList: (b: any) => boolean;
     duplicate: () => BufferListStream;
+    shallowSlice(start?: number, end?: number): BufferListStream;
 }
 
 export = BufferListStream;
