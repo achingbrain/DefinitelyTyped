@@ -15,7 +15,7 @@ interface BufferListStream extends Duplex, BufferList {}
 
 declare class BufferListStream {
     constructor(initialData?: Buffer | Buffer[] | BufferList | BufferList[] | string);
-    static isBufferList: (b: any) => boolean;
+    static isBufferList: (other: any) => boolean;
     duplicate: () => BufferListStream;
     shallowSlice(start?: number, end?: number): BufferListStream;
 }
