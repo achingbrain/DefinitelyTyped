@@ -1,13 +1,13 @@
-import BufferList from 'bl';
-import BufferListDeepExport from 'bl/BufferList';
+import BufferListStream from "bl";
+import BufferListDeepExport from "bl/BufferList";
 
-var bl: BufferList;
+var bl: BufferListStream;
 var buffer: Buffer;
 var offset: number;
 var num: number;
 var str: string;
 
-BufferList.isBufferList({});
+BufferListStream.isBufferList({});
 
 // has Duplex methods
 bl.pause();
@@ -19,19 +19,19 @@ var bufferListDeep = new BufferListDeepExport();
 bufferListDeep = bl.duplicate();
 
 // is not assignable as it lacks the Duplex methods
-var bl2: BufferList;
+var bl2: BufferListStream;
 bl2 = bufferListDeep; // $ExpectError
 
 // does not have Duplex methods
 bufferListDeep.pause(); // $ExpectError
 bufferListDeep.resume(); // $ExpectError
 
-bl = new BufferList();
-bl = new BufferList(bl);
-bl = new BufferList([bl]);
-bl = new BufferList(Buffer.from('asdf'));
-bl = new BufferList([Buffer.from('asdf')]);
-bl = new BufferList('hi');
+bl = new BufferListStream();
+bl = new BufferListStream(bl);
+bl = new BufferListStream([bl]);
+bl = new BufferListStream(Buffer.from("asdf"));
+bl = new BufferListStream([Buffer.from("asdf")]);
+bl = new BufferListStream("hi");
 
 bl.append(buffer);
 num = bl.length;
@@ -57,8 +57,8 @@ str = bl.toString(str, num, num);
 str = bl.toString(str, num);
 str = bl.toString(str);
 str = bl.toString();
-bl.indexOf('foo', 0, 'hex') === 1;
-bl.indexOf(Buffer.from('foo')) === 1;
+bl.indexOf("foo", 0, "hex") === 1;
+bl.indexOf(Buffer.from("foo")) === 1;
 bl.indexOf(4) === 1;
 bl.indexOf(bl) === 1;
 bl.indexOf(new Uint8Array([1, 3, 4])) === 2;
@@ -96,7 +96,7 @@ num = bl.readIntLE(offset);
 num = bl.readUIntBE(offset);
 num = bl.readUIntLE(offset);
 
-BufferList.isBufferList(bl); // $ExpectTrue
-BufferList.isBufferList({}); // $ExpectFalse
+BufferListStream.isBufferList(bl); // $ExpectTrue
+BufferListStream.isBufferList({}); // $ExpectFalse
 BufferListDeepExport.isBufferList(bufferListDeep); // $ExpectTrue
 BufferListDeepExport.isBufferList({}); // $ExpectFalse
